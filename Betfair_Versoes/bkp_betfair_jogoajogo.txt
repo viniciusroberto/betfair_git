@@ -1,0 +1,80 @@
+class Betfair < SitePrism::Page
+  element :login, '#ssc-liu'
+  element :senha, '#ssc-lipw'
+  element :btnEntrar, '#ssc-lis'
+  element :txtPesquisar, :xpath, "//*[@id='ssc-search']/div/form/input"
+  element :btnPesquisar, :xpath, "//*[@id='ssc-search']/div/form/button"
+  element :back, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[3]/div/div[1]/div/bf-main-market/bf-main-marketview/div/div[2]/bf-marketview-runners-list[2]/div/div/div/table/tbody/tr[1]/td[4]/button/div/span[1]"
+  element :aposta, 'input[id*=stake-id-p-back]'
+  element :lay, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[3]/div/div[1]/div/bf-main-market/bf-main-marketview/div/div[2]/bf-marketview-runners-list[2]/div/div/div/table/tbody/tr[2]/td[4]/button/div/span[1]"
+  element :empate, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[3]/div/div[1]/div/bf-main-market/bf-main-marketview/div/div[2]/bf-marketview-runners-list[2]/div/div/div/table/tbody/tr[3]/td[4]/button/div/span[1]"
+  element :tempo, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div/div/ng-include/div[1]/p/span"
+  element :odd_maior_seis, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[3]/div/div[1]/div/bf-main-market/bf-main-marketview/div/div[2]/bf-marketview-runners-list[2]/div/div/div/table/tbody/tr[1]/td[4]/button"
+
+
+    def betfair
+      visit 'https://www.betfair.com/'
+      sleep 3
+      login.set 'rabetti.g@gmail.com'
+      senha.set 'TdGr4410039492**'
+      btnEntrar.click
+      sleep 5
+      click_on 'Intercâmbio'
+      sleep 4
+      hora = Time.now.strftime("%H:%M").to_s
+      puts hora
+      # loop do
+      #   if hora == '22:06'
+      #     puts 'chegou a hora'
+      #     break
+      #   end
+      # end
+
+      jogo = 'Club Leon FC (W) v Club Necaxa (W)'
+      puts (jogo)
+      txtPesquisar.set jogo
+      btnPesquisar.click
+      sleep 4
+      click_on (jogo)
+      sleep 4
+      #odd = 1.10
+      puts back.text.to_f
+      puts lay.text.to_f
+      puts empate.text.to_f
+      #click_on 'Mais/Menos de 6.5 golos'
+      #odd_maior_seis.click
+
+        loop do
+        valorBack = back.text.to_f
+        valorLay = lay.text.to_f
+        valorEmpate = empate.text.to_f
+        valorAposta = 1.05.to_f
+
+      #puts "valor aposta #{valorAposta}"
+        if valorEmpate <= valorAposta
+          puts 'empate'
+          empate.click
+          aposta.set '5'
+          click_button 'Apostar'
+          sleep 100
+          break
+        end
+        if valorLay <= valorAposta
+          puts 'lay'
+          lay.click
+          aposta.set '5'
+          click_button 'Apostar'
+            sleep 100
+          break
+        end
+        if valorBack <= valorAposta
+          puts 'back'
+          back.click
+          aposta.set '5'
+          click_button 'Apostar'
+          sleep 100
+          break
+        end
+        end
+      end
+    end

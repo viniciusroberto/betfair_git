@@ -1,0 +1,6 @@
+    def betfair
+      arq = File.new("relatorio.txt", "a")
+        arq.puts "Nome do funcionario: "
+        arq.print "Data: "
+arq.print data.strftime("%d/%m/%Y - %H:%M:%S")
+        arq.close

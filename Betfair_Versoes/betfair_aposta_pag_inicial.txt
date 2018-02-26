@@ -1,0 +1,128 @@
+class Betfair < SitePrism::Page
+  @auxiliar = 1
+  element :login, '#ssc-liu'
+  element :senha, '#ssc-lipw'
+  element :btnEntrar, '#ssc-lis'
+  element :txtPesquisar, :xpath, "//*[@id='ssc-search']/div/form/input"
+  element :btnPesquisar, :xpath, "//*[@id='ssc-search']/div/form/button"
+  element :back, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[1]/button[1]/div/span[1]"
+  element :aposta, 'input[id*=stake-id-p-back]'
+  element :lay, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[3]/button[1]/div/span[1]"
+  element :empate, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[2]/button[1]/div/span[1]"
+  element :tempo, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div/div/ng-include/div[1]/p/span"
+  element :odd_maior_seis, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[3]/div/div[1]/div/bf-main-market/bf-main-marketview/div/div[2]/bf-marketview-runners-list[2]/div/div/div/table/tbody/tr[1]/td[4]/button"
+  element :futebol_menu, :xpath, '//*[@id="main-wrapper"]/div/div[3]/div/div[1]/div[4]/div/div/div/ng-include/div/div/ul/li/tree-section/span/div/div/div/ul/li[18]/a'
+  element :futebol_menu2, :xpath, '//*[@id="main-wrapper"]/div/div[3]/div/div[1]/div[4]/div/div/div/ng-include/div/div/ul/li[2]/tree-section/ul/li/a'
+  element :ordenacaoPor, :xpath, '//*[@id="main-wrapper"]/div/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[1]/main/ng-include[2]/section/div[1]/div/bf-select/div/label'
+  element :data, :xpath, '//*[@id="main-wrapper"]/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[2]/section/div[1]/div/bf-select/div/div/bf-option[2]/span'
+  element :jogo, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section[1]/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[1]/a/bf-event-line/section"
+  element :popup_suspenso, :xpath, "//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[2]/td[#{@auxiliar}]/ng-include/div/span"
+
+
+#   def validar_odd
+#     puts 'entrrou no metodo'
+#     if page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[1]/button[1]/div/span[1]") == true && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[3]/button[1]/div/span[1]") == true  && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[2]/button[1]/div/span[1]") == true && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[2]/td[#{@auxiliar}]/ng-include/div/span") == false
+#     $valorBack = back.text.to_f
+#     $valorLay = lay.text.to_f
+#     $valorEmpate = empate.text.to_f
+#     puts "Back: #{$valorBack}"
+#     puts "Lay: #{$valorLay}"
+#     puts "Empate: #{$valorEmpate}"
+#  else
+#    puts 'Odd vazia'
+#   return
+# end
+
+  # end
+def betfair
+  visit 'https://www.betfair.com/'
+  sleep 3
+  login.set 'rabetti.g@gmail.com'
+  senha.set 'TdGr4410039492**'
+  btnEntrar.click
+  sleep 5
+  click_on 'Intercâmbio'
+  sleep 6
+  futebol_menu.click
+  sleep 4
+  ordenacaoPor.click
+  sleep 3
+  data.click
+  sleep 4
+  @auxiliar = 1
+  # $valorBack = 5.0
+  # $valorLay = 5.0
+  # $valorEmpate = 5.0
+  binding.pry
+      loop do
+              puts 'entrou no loop'
+              if page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[1]/button[1]/div/span[1]") == true && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div[1]/div[1]/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[3]/button[1]/div/span[1]") == true  && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div[1]/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[#{@auxiliar}]/td[2]/div[2]/button[1]/div/span[1]") == true && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[2]/td[#{@auxiliar}]/ng-include/div/span") == false
+              puts 'entrou no if'
+              valorAposta = 1.05.to_f
+              # puts 'verificando se a Odd esta entre 1.06 e 1.15'
+              #  if $valorEmpate < 1.12 && $valorEmpate > 1.05 or $valorLay < 1.12 && $valorLay > 1.05 or $valorBack < 1.25 && $valorBack > 1.05
+              #    loop do
+                   $valorBack = back.text.to_f
+                   $valorLay = lay.text.to_f
+                   $valorEmpate = empate.text.to_f
+                       puts "Back: #{$valorBack}"
+                       puts "Lay: #{$valorLay}"
+                       puts "Empate: #{$valorEmpate}"
+              #      valorAposta = 1.05.to_f
+                      if $valorBack <= valorAposta && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[2]/td[#{@auxiliar}]/ng-include/div/span") == false
+                            puts "A aposta sera realizada em: Back no valor de ODD: #{$valorBack}"
+                            back.click
+                            aposta.set '5'
+                            # click_button 'Apostar'
+                            sleep 20
+                            # break
+                      # end
+                    elsif $valorLay <= valorAposta && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[2]/td[#{@auxiliar}]/ng-include/div/span") == false
+                          puts "A aposta sera realizada em: Lay no valor da ODD: #{$valorLay}"
+                          lay.click
+                          aposta.set '5'
+                          # click_button 'Apostar'
+                         sleep 20
+                          # break
+                        # end
+                      elsif $valorEmpate <= valorAposta && page.has_xpath?("//*[@id='main-wrapper']/div/div[3]/div/div[2]/div/div/div/div[1]/div/div[1]/main/ng-include[3]/section/div[2]/bf-coupon-table[1]/div/table/tbody/tr[2]/td[#{@auxiliar}]/ng-include/div/span") == false
+                            puts "A aposta sera realizada em: Empate no valor da ODD: #{$valorEmpate}"
+                            empate.click
+                            aposta.set '5'
+                            # click_button 'Apostar'
+                            sleep 20
+                            # break
+                          # end
+
+                        else
+                          puts 'odd vazia'
+                        end
+
+              end # if la em cima
+              #   end # Segundo Loop
+              #
+              # end # if valorEmpate < 1.15 && valorEmpate > 1.05
+              puts "passou por jogo #{@auxiliar}"
+              #puts '____________________________________________'
+              #futebol_menu2.click # voltar aos jogos
+                @auxiliar += 1 # variavel pora percorrer aos jogos
+              #  puts "Vai para o jogo: #{@auxiliar}"
+              sleep 3
+              # else # Se não tiver o jogos
+              #   @auxiliar = 1
+              # end
+
+      end # loop
+
+
+
+    end # Método
+  # end # Class
+
+
+
+end
+
+
+
+#puts "valor aposta #{valorAposta}"
