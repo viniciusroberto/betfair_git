@@ -1,39 +1,38 @@
 pipeline {
   agent any
   stages {
-    stage('Buildind project App') {
-      steps {
-        echo 'Building project....'
-      }
-    }
-
     stage('Health Check') {
       steps {
-        echo 'Helth Check'
+        echo 'Log.....'
+        sleep 5
       }
     }
 
-    stage('Test Contract') {
+    stage('Teste Contrato') {
       steps {
-        echo 'Teste de Contrato'
+        echo 'log Teste contrato'
+        sleep 5
       }
     }
 
     stage('Test Api Fluxo') {
       steps {
-        echo 'Teste Api Fluxo'
+        echo 'log'
+        sleep 7
       }
     }
 
     stage('Teste API Negocio') {
       steps {
         echo 'Teste API Negocio'
+        sleep 4
       }
     }
 
     stage('Test App') {
       steps {
         echo 'Teste Mobile'
+        sleep 10
       }
     }
 
