@@ -1,69 +1,124 @@
 pipeline {
   agent any
   stages {
-    stage('Health Check') {
-      steps {
-        echo 'Log.....'
-        sleep 5
+    stage('HealthCheck') {
+      parallel {
+        stage('Cartoes-Health Check') {
+          steps {
+            echo 'Log.....'
+            sleep 5
+          }
+        }
+
+        stage('Pix-Health Check') {
+          steps {
+            echo 'log'
+            sleep 3
+          }
+        }
+
+        stage('Atendimento-HealthCheck') {
+          steps {
+            sleep 3
+          }
+        }
+
       }
     }
 
     stage('Teste Contrato') {
-      steps {
-        echo 'log Teste contrato'
-        sleep 5
-      }
-    }
-
-    stage('Test Api Fluxo') {
-      steps {
-        echo 'log'
-        sleep 7
-      }
-    }
-
-    stage('Teste API Negocio') {
-      steps {
-        echo 'Teste API Negocio'
-        sleep 4
-      }
-    }
-
-    stage('Teste App') {
       parallel {
-        stage('Pagamento App') {
+        stage('Cartoes-Teste Contrato') {
+          steps {
+            echo 'log Teste contrato'
+            sleep 5
+          }
+        }
+
+        stage('Pixt-TesteContrato') {
+          steps {
+            sleep 3
+          }
+        }
+
+        stage('Atendimento-Contrato') {
+          steps {
+            sleep 5
+          }
+        }
+
+      }
+    }
+
+    stage('Cartoes-Api Fluxo') {
+      parallel {
+        stage('Cartoes-Api Fluxo') {
+          steps {
+            echo 'log'
+            sleep 7
+          }
+        }
+
+        stage('Pix-Api Fluxo') {
+          steps {
+            sleep 4
+          }
+        }
+
+        stage('Atnedimento-ApiFluxo') {
+          steps {
+            sleep 4
+          }
+        }
+
+      }
+    }
+
+    stage('Cartoes-API Negocio') {
+      parallel {
+        stage('Cartoes-API Negocio') {
+          steps {
+            echo 'Teste API Negocio'
+            sleep 4
+          }
+        }
+
+        stage('Pix - API Negocio') {
+          steps {
+            sleep 4
+          }
+        }
+
+        stage('Atendimento-ApiNegocio') {
+          steps {
+            sleep 2
+          }
+        }
+
+      }
+    }
+
+    stage('Cartoes-App') {
+      parallel {
+        stage('Cartoes-App') {
           steps {
             echo 'Teste Mobile'
             sleep 10
           }
         }
 
-        stage('Func Pagamento') {
+        stage('Pix - App') {
           steps {
-            sleep 12
-            echo 'log...'
+            sleep 2
           }
         }
 
-        stage('Func. Qr Code') {
+        stage('Atendimento App') {
           steps {
-            sleep 7
+            sleep 3
           }
         }
 
-        stage('Func. Extrato') {
-          steps {
-            echo 'log'
-            sleep 9
-          }
-        }
-
-      }
-    }
-
-    stage('Gerar report') {
-      steps {
-        echo 'result'
       }
     }
 
