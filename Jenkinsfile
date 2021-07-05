@@ -29,7 +29,7 @@ pipeline {
       }
     }
 
-    stage('Pagamento App') {
+    stage('Teste App') {
       parallel {
         stage('Pagamento App') {
           steps {
@@ -38,20 +38,20 @@ pipeline {
           }
         }
 
-        stage('Transferencia App') {
+        stage('Func Pagamento') {
           steps {
             sleep 12
             echo 'log...'
           }
         }
 
-        stage('Qr Code') {
+        stage('Func. Qr Code') {
           steps {
             sleep 7
           }
         }
 
-        stage('Extrato') {
+        stage('Func. Extrato') {
           steps {
             echo 'log'
             sleep 9
