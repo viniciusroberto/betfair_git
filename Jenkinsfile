@@ -29,10 +29,41 @@ pipeline {
       }
     }
 
-    stage('Test App') {
+    stage('Pagamento App') {
+      parallel {
+        stage('Pagamento App') {
+          steps {
+            echo 'Teste Mobile'
+            sleep 10
+          }
+        }
+
+        stage('Transferencia App') {
+          steps {
+            sleep 12
+            echo 'log...'
+          }
+        }
+
+        stage('Qr Code') {
+          steps {
+            sleep 7
+          }
+        }
+
+        stage('Extrato') {
+          steps {
+            echo 'log'
+            sleep 9
+          }
+        }
+
+      }
+    }
+
+    stage('Gerar report') {
       steps {
-        echo 'Teste Mobile'
-        sleep 10
+        echo 'result'
       }
     }
 
