@@ -19,7 +19,13 @@ pipeline {
 
         stage('Atendimento-HealthCheck') {
           steps {
-            sleep 3
+            sleep 5
+          }
+        }
+
+        stage('Onboarding-HealthChek') {
+          steps {
+            sleep 15
           }
         }
 
@@ -35,15 +41,21 @@ pipeline {
           }
         }
 
-        stage('Pixt-TesteContrato') {
+        stage('Pixt-Contrato') {
           steps {
-            sleep 3
+            sleep 7
           }
         }
 
         stage('Atendimento-Contrato') {
           steps {
             sleep 5
+          }
+        }
+
+        stage('Onboarding-Contrato') {
+          steps {
+            sleep 12
           }
         }
 
@@ -55,7 +67,7 @@ pipeline {
         stage('Cartoes-Api Fluxo') {
           steps {
             echo 'log'
-            sleep 7
+            sleep 8
           }
         }
 
@@ -68,6 +80,12 @@ pipeline {
         stage('Atnedimento-ApiFluxo') {
           steps {
             sleep 4
+          }
+        }
+
+        stage('Onboarding-ApiFluxo') {
+          steps {
+            sleep 19
           }
         }
 
@@ -91,7 +109,13 @@ pipeline {
 
         stage('Atendimento-ApiNegocio') {
           steps {
-            sleep 2
+            sleep 10
+          }
+        }
+
+        stage('Onboarding-APINegocio') {
+          steps {
+            sleep 19
           }
         }
 
@@ -109,13 +133,19 @@ pipeline {
 
         stage('Pix - App') {
           steps {
-            sleep 2
+            sleep 12
           }
         }
 
         stage('Atendimento App') {
           steps {
             sleep 3
+          }
+        }
+
+        stage('Onboarding-App') {
+          steps {
+            sleep 7
           }
         }
 
