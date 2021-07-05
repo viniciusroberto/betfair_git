@@ -152,5 +152,11 @@ pipeline {
       }
     }
 
+    stage('Gerar Report') {
+      steps {
+        echo 'log report'
+      }
+    }
+
   }
 }
